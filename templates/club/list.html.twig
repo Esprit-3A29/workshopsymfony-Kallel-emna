@@ -29,5 +29,4 @@
 {% endfor %}
 <h5> nbr de participants : {{somme}} </h5> 
 
-
 <h4> la formation qui a le plus grand nombre de participants :  {{ tableDeFormation |sort((a, b) => a.nb_participants < b.nb_participants)|column('Titre').0 }}  </h4>
