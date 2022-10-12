@@ -41,7 +41,7 @@ class ClassroomController extends AbstractController
              $em->flush();
              return  $this->redirectToRoute("list_classroom");
          }
-        return $this->renderForm("classroom/add.html.twig",array("formclassroom"=>$form));
+        return $this->renderForm("classroom/add.html.twig",array("ClassroomType"=>$form));
     }
 
     #[Route('/updateclassroom', name: 'update_classroom')]

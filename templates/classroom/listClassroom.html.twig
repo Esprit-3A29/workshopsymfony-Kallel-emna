@@ -5,7 +5,7 @@
 id:{{c.id}}
 name:{{c.name}}
 description:{{c.description}}
- <a href="{{ path('update_classroom',{'id':s.id}) }}">Update</a>
-    <a href="{{ path('remove',{'id':s.id}) }}">Remove</a>
+ <a href="{{ path('update_classroom',{'id':c.id}) }}">Update</a>
+    <a href="{{ path('remove',{'id':c.id}) }}">Remove</a>
 <br>
 {%endfor%}
