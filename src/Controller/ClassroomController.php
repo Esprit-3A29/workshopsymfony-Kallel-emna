@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class ClassroomController extends AbstractController
 {
     #[Route('/classroom', name: 'app_classroom')]
@@ -44,7 +43,7 @@ class ClassroomController extends AbstractController
         return $this->renderForm("classroom/add.html.twig",array("ClassroomType"=>$form));
     }
 
-    #[Route('/updateclassroom', name: 'update_classroom')]
+    #[Route('/updateclassroom/{id}', name: 'update_classroom')]
     public function updateClassroom($id,ClassroomRepository $repository,ManagerRegistry $doctrine,Request $request)
     {
         $classroom= $repository->find($id);
@@ -57,7 +56,7 @@ class ClassroomController extends AbstractController
         }
         return $this->renderForm("classroom/update.html.twig",array("formClassroom"=>$form));
     }
-
+  
     #[Route('/removeForm/{id}', name: 'remove')]
     public function removeClassroom($id, ClassroomRepository $repository,ManagerRegistry $doctrine)
     {
@@ -67,4 +66,5 @@ class ClassroomController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("list_classroom");
     }
-}
+} 
+  

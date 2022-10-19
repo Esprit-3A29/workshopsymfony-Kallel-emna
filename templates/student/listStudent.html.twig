@@ -1,11 +1,12 @@
-<a href="#">Add Student</a>
-
-{%for s in tabStudent %}
-nce:{{s.nce}}
-username:{{s.username}}
-moyenne:{{s.moyenne}}
-
-<a href="#">Delete</a>
-<a href="#">Update</a>
+<a href="{{ path('add2') }}">Add Student</a>
 <br>
-{%endfor%}
+<h2>Liste Student</h2>
+<br>
+{% for s in  tabStudent %}
+    nce: {{ s.nce }}
+    username: {{ s.username }}
+    moyenne: {{ s.moyenne }}
+    <a href="{{ path('update',{'nce':s.nce}) }}">Update</a>
+    <a href="{{ path('remove',{'nce':s.nce}) }}">Remove</a>
+    <br>
+{% endfor %}

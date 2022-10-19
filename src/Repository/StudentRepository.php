@@ -30,6 +30,16 @@ class StudentRepository extends ServiceEntityRepository
         }
     }
 
+    public function add(Student $entity, bool $flush = false):void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if($flush)
+        {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     public function remove(Student $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
