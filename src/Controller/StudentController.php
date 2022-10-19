@@ -46,7 +46,7 @@ class StudentController extends AbstractController
     }
     
 
-    #[Route('/updateForm/{nce}', name: 'update')]
+    #[Route('/updateForm/{nce}', name: 'update2')]
     public function  updateForm($nce,StudentRepository $repository,ManagerRegistry $doctrine,Request $request)
     {
         $student= $repository->find($nce);
@@ -60,7 +60,7 @@ class StudentController extends AbstractController
         return $this->renderForm("student/update.html.twig",array("formStudent"=>$form));
     }
 
-    #[Route('/removeForm/{nce}', name: 'remove')]
+    #[Route('/removeForm/{nce}', name: 'remove2')]
 
     public function removeStudent(ManagerRegistry $doctrine,$nce,StudentRepository $repository)
     {

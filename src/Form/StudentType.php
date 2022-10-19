@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Classroom;
 use App\Entity\Student;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +19,7 @@ class StudentType extends AbstractType
             ->add('nce')
             ->add('username')
             ->add('moyenne')
-            ->add('classroom')
+            ->add('classroom', EntityType::class, array('class'=>Classroom::class,'choice_label'=>'name'))
             ->add("submit",SubmitType::class)
         ;
     }
