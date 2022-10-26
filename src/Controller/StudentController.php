@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Repository\StudentRepository;
 use App\Form\StudentType;
+use App\Form\SearchStudentType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\ClassroomRepository;
 
 
 class StudentController extends AbstractController
@@ -23,10 +25,29 @@ class StudentController extends AbstractController
     }
 
     #[Route('/students', name: 'list_student')]
-    public function liststudent(StudentRepository $repository)
+    public function liststudent(StudentRepository $repository, Request $request)
     {
         $students=$repository->findAll();
-        return $this->render("student/listStudent.html.twig", array("tabStudent"=>$students));
+
+        $sortByMoyenne=$repository->sortByMoyenne();
+        $formSearch= $this->createForm(SearchStudentType::class);
+        $formSearch->handleRequest($request);
+        $topStudents= $repository->topStudents();
+        if ($formSearch->isSubmitted())
+        {
+            $nce=$formSearch->getData();
+          //  var_dump($nce).die();
+            $result=$repository->searchStudent($nce);
+            return $this->renderForm("student/listStudent.html.twig",
+            array("tabStudent"=>$result,
+                   "sortByMoyenne"=>$sortByMoyenne,
+                   "searchForm"=>$formSearch, "topStudents"=>$topStudents));
+        }
+        return $this->renderForm("student/listStudent.html.twig",
+        array("tabStudent"=>$students,
+         "sortByMoyenne"=>$sortByMoyenne,
+         "searchForm"=>$formSearch,
+         "topStudents"=>$topStudents));
     }
 
 
